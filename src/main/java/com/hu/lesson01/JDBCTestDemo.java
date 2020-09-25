@@ -1,4 +1,4 @@
-package com.hu.jdbc;
+package com.hu.lesson01;
 
 import java.sql.*;
 
@@ -17,17 +17,19 @@ public class JDBCTestDemo {
         String username = "root";
         String password = "123456";
 
-        //2.获取连接 connnection代表数据库
+        //2.获取连接 connnection代表与数据库的连接，客户端与数据库的所有交互都是通过connnection完成的
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        //3.获取sql执行对象statement
+
+        //3.statement用于向数据库发送sql语句
         Statement statement = connection.createStatement();
 
-        //4.执行sql
+        //4.执行sql，resultSet代表sql语句的执行结果
         String sql = "SELECT * FROM users;";
         ResultSet resultSet = statement.executeQuery(sql);
 
         //5.获取信息
+        //When a call to the next method returns false, the cursor is positioned after the last row.
         while(resultSet.next()){
             System.out.print("id = " + resultSet.getObject("id") + " ");
             System.out.print("NAME = " + resultSet.getObject("NAME") + " ");
